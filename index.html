@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Italo Disco Legacy | 24/7 Italo Disco Station</title>
+    <!-- Φόρτωση των γραμματοσειρών Audiowide & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-pink: #ff0055;
+            --neon-blue: #00f0ff;
+            --yellow-accent: #ffe600;
+            --bg-dark: #0a0612;
+            --card-bg: #140d24;
+            --text-light: #f1f1f7;
+            --text-muted: #9e93b4;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.5;
+        }
+
+        /* HEADER */
+        header {
+            background-color: #050308;
+            border-bottom: 2px solid var(--primary-pink);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-logo {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.8rem;
+            text-transform: uppercase;
+            color: #fff;
+            text-decoration: none;
+            letter-spacing: 1.5px;
+        }
+
+        .brand-logo span {
+            color: var(--primary-pink);
+            text-shadow: 0 0 10px var(--primary-pink);
+        }
+
+        .live-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Audiowide', cursive;
+            font-size: 0.95rem;
+            color: var(--neon-blue);
+            text-transform: uppercase;
+        }
+
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background-color: var(--primary-pink);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--primary-pink);
+            animation: blink 1s infinite alternate;
+        }
+
+        @keyframes blink { 0% { opacity: 0.3; } 100% { opacity: 1; } }
+
+        /* HERO BANNER - ΔΙΑΒΑΖΕΙ ΑΠΕΥΘΕΙΑΣ ΤΟ DISCO.JPG */
+        .hero-banner {
+            position: relative;
+            background: linear-gradient(rgba(10, 6, 18, 0.45), rgba(10, 6, 18, 0.85)),
+                        url('disco.jpg') center/cover no-repeat;
+            padding: 80px 20px 60px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .hero-title {
+            font-family: 'Audiowide', cursive;
+            font-size: 3.2rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: #fff;
+            text-shadow: 0 0 20px var(--primary-pink);
+            margin-bottom: 8px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.1rem;
+            color: var(--yellow-accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+        }
+
+        .main-player-box {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(20, 13, 36, 0.95);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.3);
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        /* NOW PLAYING CONTAINER */
+        .now-playing-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(255, 0, 85, 0.3);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin-bottom: 20px;
+        }
+
+        .now-playing-label {
+            font-family: 'Audiowide', cursive;
+            font-size: 0.8rem;
+            color: var(--primary-pink);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .track-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #ffffff;
+            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+            word-break: break-word;
+        }
+
+        audio {
+            width: 100%;
+            height: 45px;
+        }
+
+        /* MAIN CONTENT LAYOUT */
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 900px) {
+            .container { grid-template-columns: 1fr; }
+            .hero-title { font-size: 2.1rem; }
+            .brand-logo { font-size: 1.3rem; }
+        }
+
+        .section-header {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            color: var(--neon-blue);
+            border-bottom: 2px solid var(--neon-blue);
+            padding-bottom: 8px;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        /* TOP 5 MUSIC CHART TABLE */
+        .chart-list {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .chart-item {
+            display: flex;
+            align-items: center;
+            padding: 14px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            transition: background 0.2s;
+        }
+
+        .chart-item:hover {
+            background-color: rgba(255, 0, 85, 0.1);
+        }
+
+        .chart-rank {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.3rem;
+            color: var(--yellow-accent);
+            width: 45px;
+        }
+
+        .chart-info {
+            flex-grow: 1;
+        }
+
+        .chart-song {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #fff;
+        }
+
+        .chart-artist {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .chart-badge {
+            font-family: 'Audiowide', cursive;
+            font-size: 0.7rem;
+            background: var(--primary-pink);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        /* SIDEBAR WIDGETS */
+        .widget {
+            background-color: var(--card-bg);
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .widget-title {
+            font-family: 'Audiowide', cursive;
+            font-size: 1.2rem;
+            color: var(--yellow-accent);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        /* RECENTLY PLAYED LIST */
+        .recent-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .recent-item:last-child {
+            border-bottom: none;
+        }
+
+        .recent-icon {
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+        }
+
+        .recent-text {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            word-break: break-word;
+        }
+
+        .empty-history {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+
+        footer {
+            background-color: #050308;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 25px 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- TOP HEADER -->
+    <header>
+        <div class="top-bar">
+            <a href="#" class="brand-logo">ITALO DISCO <span>LEGACY</span></a>
+            <div class="live-status">
+                <span class="live-dot"></span> 24/7 ITALO DISCO STREAM
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero-banner">
+        <h1 class="hero-title">ITALO DISCO LEGACY</h1>
+        <p class="hero-subtitle">PURE 80s SYNTHESIZERS & DISCO BEATS</p>
+
+        <div class="main-player-box">
+            <!-- NOW PLAYING WIDGET -->
+            <div class="now-playing-box">
+                <div class="now-playing-label">
+                    <span>🎵</span> NOW PLAYING
+                </div>
+                <div class="track-title" id="currentTrack">Loading live song info...</div>
+            </div>
+            
+            <!-- STREAM URL -->
+            <audio id="radioAudio" controls preload="none">
+                <source src="https://stream.zeno.fm/um9lejs82ztvv" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </section>
+
+    <!-- MAIN MUSIC LAYOUT -->
+    <div class="container">
+        
+        <!-- LEFT COLUMN: DYNAMIC TOP CHARTS -->
+        <main>
+            <div class="section-header">
+                🏆 Top 5 Italo Disco Chart
+            </div>
+
+            <div class="chart-list" id="chartContainer"></div>
+        </main>
+
+        <!-- RIGHT COLUMN: RECENTLY PLAYED HISTORY (LAST 5) -->
+        <aside>
+            <div class="widget">
+                <div class="widget-title">📻 Recently Played</div>
+                <div id="recentPlayedContainer">
+                    <div class="empty-history">Waiting for track changes...</div>
+                </div>
+            </div>
+        </aside>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Italo Disco Legacy • Pure Italo Disco Sound</p>
+    </footer>
+
+    <!-- JAVASCRIPT: TOP 5 & AUTOMATIC RECENTLY PLAYED HISTORY -->
+    <script>
+        // TOP 5 SONGS
+        const top5Songs = [
+            { song: "Dolce Vita", artist: "Ryan Paris", tag: "CLASSIC" },
+            { song: "I Like Chopin", artist: "Gazebo", tag: "12\" MAXI" },
+            { song: "Tarzan Boy", artist: "Baltimora", tag: "HIT" },
+            { song: "Hypnotic Tango", artist: "My Mine", tag: "RARE" },
+            { song: "Happy Children", artist: "P. Lion", tag: "ANTHEM" }
+        ];
+
+        const container = document.getElementById('chartContainer');
+        top5Songs.forEach((item, index) => {
+            const rank = (index + 1).toString().padStart(2, '0');
+            const rowHtml = `
+                <div class="chart-item">
+                    <div class="chart-rank">${rank}</div>
+                    <div class="chart-info">
+                        <div class="chart-song">${item.song}</div>
+                        <div class="chart-artist">${item.artist}</div>
+                    </div>
+                    <span class="chart-badge">${item.tag}</span>
+                </div>
+            `;
+            container.innerHTML += rowHtml;
+        });
+
+        // LIVE METADATA & RECENTLY PLAYED HISTORY SYSTEM
+        const trackElement = document.getElementById('currentTrack');
+        const recentContainer = document.getElementById('recentPlayedContainer');
+        const STREAM_ID = "um9lejs82ztvv";
+        
+        let recentTracks = [];
+        let currentSongTitle = "";
+
+        function updateRecentPlayedUI() {
+            if (recentTracks.length === 0) {
+                recentContainer.innerHTML = '<div class="empty-history">Waiting for track changes...</div>';
+                return;
+            }
+
+            recentContainer.innerHTML = recentTracks.map(song => `
+                <div class="recent-item">
+                    <span class="recent-icon">🕒</span>
+                    <span class="recent-text">${song}</span>
+                </div>
+            `).join('');
+        }
+
+        function connectMetadataStream() {
+            const eventSource = new EventSource(`https://api.zeno.fm/mounts/metadata/subscribe/${STREAM_ID}`);
+
+            eventSource.onmessage = function(event) {
+                try {
+                    const data = JSON.parse(event.data);
+                    if (data && data.streamTitle) {
+                        const newTitle = data.streamTitle.trim();
+
+                        if (newTitle !== currentSongTitle) {
+                            if (currentSongTitle !== "") {
+                                recentTracks.unshift(currentSongTitle);
+                                if (recentTracks.length > 5) {
+                                    recentTracks.pop();
+                                }
+                                updateRecentPlayedUI();
+                            }
+                            currentSongTitle = newTitle;
+                            trackElement.textContent = currentSongTitle;
+                        }
+                    } else {
+                        trackElement.textContent = "Italo Disco Legacy - Live Stream";
+                    }
+                } catch (e) {
+                    trackElement.textContent = "Italo Disco Legacy - Live Stream";
+                }
+            };
+
+            eventSource.onerror = function() {
+                trackElement.textContent = "Italo Disco Legacy - Live Stream";
+                eventSource.close();
+                setTimeout(connectMetadataStream, 15000);
+            };
+        }
+
+        connectMetadataStream();
+    </script>
+
+</body>
+</html>
