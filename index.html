@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Italo Disco Legacy | 24/7 Italo Disco Station</title>
+    <title>Theorio Web Radio | 24/7 Italo Disco Station</title>
     <!-- Φόρτωση των γραμματοσειρών Audiowide & Montserrat -->
     <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
@@ -15,6 +15,11 @@
             --card-bg: #140d24;
             --text-light: #f1f1f7;
             --text-muted: #9e93b4;
+            
+            /* Χρώματα Ιταλικής Σημαίας */
+            --italy-green: #009246;
+            --italy-white: #ffffff;
+            --italy-red: #ce2b37;
         }
 
         * {
@@ -52,14 +57,24 @@
             font-family: 'Audiowide', cursive;
             font-size: 1.8rem;
             text-transform: uppercase;
-            color: #fff;
             text-decoration: none;
             letter-spacing: 1.5px;
         }
 
-        .brand-logo span {
-            color: var(--primary-pink);
-            text-shadow: 0 0 10px var(--primary-pink);
+        /* Χρώματα Ιταλίας στο Λογότυπο */
+        .brand-logo .logo-theorio {
+            color: var(--italy-green);
+            text-shadow: 0 0 10px rgba(0, 146, 70, 0.6);
+        }
+
+        .brand-logo .logo-web {
+            color: var(--italy-white);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+        }
+
+        .brand-logo .logo-radio {
+            color: var(--italy-red);
+            text-shadow: 0 0 10px rgba(206, 43, 55, 0.6);
         }
 
         .live-status {
@@ -301,7 +316,11 @@
     <!-- TOP HEADER -->
     <header>
         <div class="top-bar">
-            <a href="#" class="brand-logo">ITALO DISCO <span>LEGACY</span></a>
+            <a href="#" class="brand-logo">
+                <span class="logo-theorio">Theorio</span> 
+                <span class="logo-web">Web</span> 
+                <span class="logo-radio">Radio</span>
+            </a>
             <div class="live-status">
                 <span class="live-dot"></span> 24/7 ITALO DISCO STREAM
             </div>
@@ -355,7 +374,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Italo Disco Legacy • Pure Italo Disco Sound</p>
+        <p>&copy; 2026 Theorio Web Radio • Pure Italo Disco Sound</p>
     </footer>
 
     <!-- JAVASCRIPT: TOP 5 & AUTOMATIC RECENTLY PLAYED HISTORY -->
@@ -428,15 +447,15 @@
                             trackElement.textContent = currentSongTitle;
                         }
                     } else {
-                        trackElement.textContent = "Italo Disco Legacy - Live Stream";
+                        trackElement.textContent = "Theorio Web Radio - Live Stream";
                     }
                 } catch (e) {
-                    trackElement.textContent = "Italo Disco Legacy - Live Stream";
+                    trackElement.textContent = "Theorio Web Radio - Live Stream";
                 }
             };
 
             eventSource.onerror = function() {
-                trackElement.textContent = "Italo Disco Legacy - Live Stream";
+                trackElement.textContent = "Theorio Web Radio - Live Stream";
                 eventSource.close();
                 setTimeout(connectMetadataStream, 15000);
             };
